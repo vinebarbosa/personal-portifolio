@@ -1,35 +1,12 @@
-const contactLinks = [
-  {
-    label: 'viniciosbarbosa.dev',
-    url: 'https://viniciosbarbosa.dev',
-  },
-  {
-    label: 'viniciosbarbosa.dev@gmail.com',
-    url: 'mailto:viniciosbarbosa.dev@gmail.com',
-  },
-  {
-    label: 'linkedin.com/in/vinebarbosabarbosa',
-    url: 'https://linkedin.com/in/vinebarbosabarbosa',
-  },
-]
-
-const experience = [
-  {
-    title: 'Engenheiro de Software Pleno',
-    company: 'LAIS',
-    date: 'Out 2022 - Atual Momento',
-    topics: [
-      `No LAIS (Laboratório de Inovação Tecnológica em Saúde), atuo na equipe de desenvolvimento de sistemas web voltados para a área da saúde, utilizados por hospitais, secretarias de saúde e pela população em geral. Desde que ingressei no LAIS, participei de diversos projetos e, como Engenheiro de Software, minhas principais responsabilidade até o momento foram:`,
-      `Desenvolvimento do Regula+Saúde, um sistema que otimiza o acesso à saúde em hospitais e secretarias de saúde dos estados do Espírito Santo e Rio Grande do Norte. Através da organização e agilização do fluxo de pacientes, o sistema reduz significativamente o tempo de espera para consultas e exames, diminuindo filas e proporcionando um atendimento mais rápido e eficiente à população. Participei de todas as etapas desse projeto, desde a concepção até a entrega, utilizando tecnologias como React, Next.js, Bootstrap, PostgreSQL e Docker além de integrá-lo com o sistema do Governo Brasileiro (Gov.BR).`,
-      `Participei ativamente na escolha de tecnologias e arquiteturas para os projetos em que estive envolvido. Além disso, desempenhei um papel crucial na orientação e capacitação de novos membros da equipe, estabelecendo processos e melhores práticas de desenvolvimento. Contribuí para a definição e implementação de testes automatizados, assegurando a qualidade do código e a estabilidade dos sistemas, utilizando ferramentas como Jest, React Testing Library e Cypress.`,
-      `Trabalhei em conjunto com a equipe de DevOps, desenvolvendo scripts de integração contínua/distribuição contínua (CI/CD), garantindo a entrega automatizada e segura dos sistemas. Além disso,  mantive sistemas legados, realizando manutenções corretivas e evolutivas, garantindo que os sistemas estivessem sempre disponíveis e funcionando corretamente.`,
-    ],
-  },
-]
+import { contactLinks } from '@/data/contact'
+import { education } from '@/data/education'
+import { experience } from '@/data/experience'
+import { skills } from '@/data/skills'
+import clsx from 'clsx'
 
 export default function Curriculo() {
   return (
-    <main className="container mx-auto">
+    <main className="container mx-auto pb-14">
       <div className="shadow p-20 px-28 rounded-lg bg-white dark:bg-gray-600/30 dark:text-gray-200">
         <header className="flex justify-between items-center">
           <h1 className="text-4xl font-semibold leading-10 text-gray-800 dark:text-gray-300">
@@ -51,9 +28,9 @@ export default function Curriculo() {
           <div className="w-2/12">
             <h2 className="uppercase font-light">Experiência</h2>
           </div>
-          <div className="w-100">
+          <div className="w-10/12">
             {experience.map((item, index) => (
-              <section key={index}>
+              <section key={index} className={clsx({ 'mt-5': index > 0 })}>
                 <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-300">
                   {item.title} - {item.company}
                 </h3>
@@ -61,16 +38,62 @@ export default function Curriculo() {
                   {item.date}
                 </span>
 
-                {item.topics.map((topic) => (
+                <p className="text-gray-600 dark:text-gray-200 mt-2 leading-relaxed">
+                  {item.topics[0]}
+                </p>
+
+                {item.topics.slice(1).map((topic) => (
                   <p
                     key={topic}
-                    className="text-gray-600 dark:text-gray-200 mt-3 text-justify leading-relaxed"
+                    className="text-gray-600 dark:text-gray-200 mt-2 leading-relaxed"
                   >
-                    {topic}
+                    - {topic}
                   </p>
                 ))}
               </section>
             ))}
+          </div>
+        </section>
+        <section className="mt-10 flex gap-20">
+          <div className="w-2/12">
+            <h2 className="uppercase font-light">Educação</h2>
+          </div>
+          <div className="w-10/12">
+            {education.map((item, index) => (
+              <section key={index} className={clsx({ 'mt-4': index > 0 })}>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-300">
+                  {item.institution}
+                </h3>
+                <span className="text-gray-500 dark:text-gray-200 font-light">
+                  {item.date}
+                </span>
+                <p className="text-gray-600 dark:text-gray-200 leading-relaxed">
+                  {item.description}
+                </p>
+              </section>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10 flex gap-20">
+          <div className="w-2/12">
+            <h2 className="uppercase font-light">Habilidades</h2>
+          </div>
+          <div className="w-10/12">
+            <div className="flex flex-col gap-3">
+              {skills.map((item) => (
+                <div key={item.title}>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-300">
+                    {item.title}
+                  </h3>
+                  <div className="flex gap-2">
+                    <span className="text-gray-600 dark:text-gray-200">
+                      {item.description}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </div>
